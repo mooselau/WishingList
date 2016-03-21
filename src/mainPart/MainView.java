@@ -14,7 +14,7 @@ public class MainView extends JFrame{
 	private JPanel mainPanel;
 	private JMenuBar topMenuBar;
 	private JMenu newMenu, editMenu, aboutMenu;
-	private JMenuItem addWishingMenuItem;
+	private JMenuItem addWishingMenuItem, printAllWishesMenuItem;
 	
 	/* Constructor */
 	public MainView() {
@@ -23,7 +23,7 @@ public class MainView extends JFrame{
 		
 		setTitle("@Moose A WishingList Reminder");
 		setSize(WIDTH, HEIGHT);
-		setResizable(false);
+//		setResizable(false);
 		// set the UI at the center of the screen
 		setLocationRelativeTo(null);
 		// close the window when clicks on the close icon.
@@ -40,31 +40,23 @@ public class MainView extends JFrame{
 	/*Layout All necessary Components*/
 	private void layoutComponents() {
 		
-		final int DEFAULT_PANEL_WIDTH = 790, DEFAULT_PANEL_HEIGHT = 100;
+		final int DEFAULT_PANEL_WIDTH = 100, DEFAULT_PANEL_HEIGHT = 5;
 		
 		this.setLayout(new BorderLayout());
 
 		layoutMenuBar();
 		
 		mainPanel = new JPanel();
-		Dimension panelSize = new Dimension(500, 100);
-		mainPanel.setSize(panelSize);
 		JScrollPane mainViewScrollPane = new JScrollPane(mainPanel, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, 
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		this.add(mainViewScrollPane, BorderLayout.CENTER);
 		
+		mainViewScrollPane.setBackground(new Color(128,128,100));
+		
 		//Help to vertically layout components.
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
-		
-		JPanel samplePanel = new JPanel();
-		samplePanel.setSize(DEFAULT_PANEL_WIDTH, DEFAULT_PANEL_HEIGHT);
-		samplePanel.setBackground(new Color(354545));
-		mainPanel.add(samplePanel);
-		
-		JProgressBar sampleJPB = new JProgressBar();
-		sampleJPB.setValue(65);
-		samplePanel.add(sampleJPB);
-	
+		mainPanel.setBackground(new Color(128,128,128));		
+	 
 	}
 	
 	/* Layout Menu Bar */
@@ -89,6 +81,11 @@ public class MainView extends JFrame{
 		
 		editMenu = new JMenu();
 		editMenu.setText("EDIT");
+		
+		printAllWishesMenuItem = new JMenuItem();
+		printAllWishesMenuItem.setText("Print ALl!");
+		printAllWishesMenuItem.addActionListener(mainController);
+		editMenu.add(printAllWishesMenuItem);
 		topMenuBar.add(editMenu);
 		
 		aboutMenu = new JMenu();
@@ -111,6 +108,10 @@ public class MainView extends JFrame{
 	
 	public JMenuItem getAddWishingMenuItem() {
 		return addWishingMenuItem;
+	}
+	
+	public JMenuItem getPrintAllWishesMenuItem() {
+		return printAllWishesMenuItem;
 	}
 }
 	
