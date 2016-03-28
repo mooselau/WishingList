@@ -14,7 +14,7 @@ public class MainView extends JFrame{
 	private JPanel mainPanel;
 	private JMenuBar topMenuBar;
 	private JMenu newMenu, editMenu, aboutMenu;
-	private JMenuItem addWishingMenuItem, printAllWishesMenuItem;
+	private JMenuItem addWishingMenuItem, printAllWishesMenuItem, editItemMenu;
 	
 	/* Constructor */
 	public MainView() {
@@ -70,7 +70,6 @@ public class MainView extends JFrame{
 		
 		newMenu = new JMenu();
 		newMenu.setText("NEW");
-		topMenuBar.add(newMenu);
 		
 		addWishingMenuItem = new JMenuItem();
 		addWishingMenuItem.setText("Add Wishing!");
@@ -78,9 +77,16 @@ public class MainView extends JFrame{
 		// (QS)use action command ??
 		//...
 		newMenu.add(addWishingMenuItem);
+		topMenuBar.add(newMenu);
 		
 		editMenu = new JMenu();
 		editMenu.setText("EDIT");
+		
+		editItemMenu = new JMenuItem();
+		editItemMenu.setText("Edit A Wish");
+		editItemMenu.setActionCommand("EDIT_A_WISH");
+		editItemMenu.addActionListener(mainController);
+		editMenu.add(editItemMenu);
 		
 		printAllWishesMenuItem = new JMenuItem();
 		printAllWishesMenuItem.setText("Print ALl!");
@@ -113,5 +119,9 @@ public class MainView extends JFrame{
 	public JMenuItem getPrintAllWishesMenuItem() {
 		return printAllWishesMenuItem;
 	}
+	
+//	public JMenuItem getEditAWishMenuItem() {
+//		
+//	}
 }
 	

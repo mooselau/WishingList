@@ -15,7 +15,8 @@ public class WishingList {
 	/**
 	 * Search for a wish with specific name.
 	 * @param wishName
-	 * @return
+	 * @return null if wishing list is empty or the wish is not found;
+	 * 		   otherwise a instance of WishItem will be returned.
 	 */
 	public WishItem searchAWish(String wishName) {
 		
@@ -78,12 +79,21 @@ public class WishingList {
 	/**
 	 * Remove all wishes.
 	 */
-	public List<WishItem> deleteAllWishes() {
+	public void deleteAllWishes() {
 		wishingList.clear();
+	}
+	
+	/**
+	 * Return current wishing list.
+	 * @return A list of wishes.
+	 */
+	public List<WishItem> getCurrentWishes() {
 		return wishingList;
 	}
 	
-	
+	/**
+	 * Display all wishes in a format.
+	 */
 	public void displayAllWishes() {
 		System.out.println("\n********************************************");
 		for(WishItem aWish: wishingList) {
