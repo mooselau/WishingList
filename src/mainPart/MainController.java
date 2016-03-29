@@ -8,7 +8,7 @@ import javax.swing.*;
 
 import defaultPart.SomeUtilities;
 
-public class MainController implements ActionListener, WindowListener{
+public class MainController implements ActionListener, WindowListener, MouseListener{
 
 	/** Global Instances */
 	private MainView mainView;
@@ -30,6 +30,10 @@ public class MainController implements ActionListener, WindowListener{
 		else if(e.getSource() == mainView.getPrintAllWishesMenuItem()) {
 			printAll();
 		}
+		else if(e.getActionCommand().equals("EDIT_A_WISH")) {
+			EditDialog editDialog = new EditDialog(wishingList);
+			editDialog.setVisible(true);
+		}
 
 	}
 	
@@ -38,12 +42,8 @@ public class MainController implements ActionListener, WindowListener{
 		wishingList.displayAllWishes();
 	}
 	
-	/**
-	 * Add a new Wish in the View and wishing list;
-	 * @param wishName
-	 * @return
-	 */
-	private JPanel addAWish(String wishName) {
+	//..
+	private JPanel addAWishOnPanel(String wishName, int percent) {
 		
 		final int DEFAULT_PANEL_WIDTH = 778, DEFAULT_PANEL_HEIGHT = 100;
 		final Dimension sizeDimension = new Dimension(DEFAULT_PANEL_WIDTH, DEFAULT_PANEL_HEIGHT);
@@ -57,15 +57,28 @@ public class MainController implements ActionListener, WindowListener{
 		
 		JLabel newWishingNameLabel = new JLabel(wishName);
 		JProgressBar newJPB = new JProgressBar();
-		int percent = toolBox.getARandomPercentNumber();
 		newJPB.setValue(percent);
 		JLabel newWishingPercentLabel = new JLabel(String.valueOf(percent)+"%");
 		newWishingPanel.add(newWishingNameLabel);
 		newWishingPanel.add(newJPB);
 		newWishingPanel.add(newWishingPercentLabel);
 		
-		wishingList.addAWish(wishName, percent);
+		return newWishingPanel;
+	}
+	
+	/**
+	 * Add a new Wish in the View and wishing list;
+	 * @param wishName
+	 * @return
+	 */
+	private JPanel addAWish(String wishName) {
 		
+		//For adding on Wishing List.
+		int percent = toolBox.getARandomPercentNumber();
+		wishingList.addAWish(wishName, percent);		
+		
+		//Belows are for adding on JPanel.
+		JPanel newWishingPanel = addAWishOnPanel(wishName, percent);
 		return newWishingPanel;
 	}
 	
@@ -82,6 +95,8 @@ public class MainController implements ActionListener, WindowListener{
 		mainView.repaint();
 	}
 	
+	
+	//For windows listeners.
 	@Override
 	public void windowOpened(WindowEvent e) {}
 
@@ -104,5 +119,42 @@ public class MainController implements ActionListener, WindowListener{
 
 	@Override
 	public void windowDeactivated(WindowEvent e) {}
+
+	
+	//For mouse listeners.
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+		if(e.getClickCount()>=2) {
+			toolBox.printThis("You just click the Panel 2 or more times!");
+		}
+		else if(SwingUtilities.isLeftMouseButton(e)) {
+			toolBox.printThis("You just clicked the Left Button!!");
+		}
+		else if(SwingUtilities.isRightMouseButton(e)) {
+			toolBox.printThis("You just clicked the Right Button!!");
+		}
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		
+	}
 
 }

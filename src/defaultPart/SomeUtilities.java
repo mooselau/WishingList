@@ -2,6 +2,10 @@ package defaultPart;
 
 import java.awt.Color;
 
+import mainPart.EditDialog;
+import supportPart.CommonExceptions;
+import mainPart.*;
+
 /**
  * This is a additional class for providing some useful utilities, which now includes: 
  * 1. get a randome number with 3 digits.
@@ -42,7 +46,7 @@ public class SomeUtilities {
 		greenInt = rgbNumber[1];
 		blueInt = rgbNumber[2];
 		
-		System.out.println("ColorNumber is: " + rgbNumber);
+		System.out.println("ColorNumber is: " + rgbNumber[0]+", "+ rgbNumber[1] +", "+rgbNumber[2]);
 		return new Color(redInt, greenInt, blueInt);
 	}
 	
@@ -74,13 +78,37 @@ public class SomeUtilities {
 		return strName;
 	}
 	
+	/**
+	 * For print customed information.
+	 * @param message customed info.
+	 */
+	public void printThis(String message) {
+		System.out.println(message);
+	}
+	
 	public static void main(String args[]) {
-		SomeUtilities su = new SomeUtilities();
-		for(int i=0;i<10;i++) {
-			su.getARandomColor();
-			su.getARandomPercentNumber();
-			su.getAStringName();
-		}
+		
+		//1.
+//		SomeUtilities su = new SomeUtilities();
+//		for(int i=0;i<10;i++) {
+//			su.getARandomColor();
+//			su.getARandomPercentNumber();
+//			su.getAStringName();
+//		}
+		
+		//2.
+//		EditDialog ed = new EditDialog();
+//		ed.setVisible(true);
+//		System.out.println("Starts..");
+		
+		//3.
+//		System.out.println("Exception starts:");
+//		try{
+//			throw new CommonExceptions("There is an invalid wish with empty name!!");	
+//		}catch(CommonExceptions e) {
+//			e.printStackTrace();
+//		}
+		
 	}
 	
 }

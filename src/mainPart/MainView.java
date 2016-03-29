@@ -14,7 +14,7 @@ public class MainView extends JFrame{
 	private JPanel mainPanel;
 	private JMenuBar topMenuBar;
 	private JMenu newMenu, editMenu, aboutMenu;
-	private JMenuItem addWishingMenuItem, printAllWishesMenuItem;
+	private JMenuItem addWishingMenuItem, printAllWishesMenuItem, editItemMenu;
 	
 	/* Constructor */
 	public MainView() {
@@ -68,9 +68,18 @@ public class MainView extends JFrame{
 		topMenuBar.setSize(MENU_WIDTH, MENU_HEIGHT);
 		this.add(topMenuBar, BorderLayout.NORTH);
 		
+		AddNewMenu(topMenuBar);
+		AddEditMenu(topMenuBar);
+		AddAboutMenu(topMenuBar);
+	}
+	
+	/**
+	 * Layout the Menu Items in New JMenu.
+	 */
+	private void AddNewMenu(JMenuBar topMenuBar) {
+		
 		newMenu = new JMenu();
 		newMenu.setText("NEW");
-		topMenuBar.add(newMenu);
 		
 		addWishingMenuItem = new JMenuItem();
 		addWishingMenuItem.setText("Add Wishing!");
@@ -78,21 +87,43 @@ public class MainView extends JFrame{
 		// (QS)use action command ??
 		//...
 		newMenu.add(addWishingMenuItem);
+		topMenuBar.add(newMenu);
+	}
+	
+	/**
+	 * Layout Menu Items in Edit Menu.
+	 */
+	private void AddEditMenu(JMenuBar topMenuBar) {
 		
 		editMenu = new JMenu();
 		editMenu.setText("EDIT");
+		
+		editItemMenu = new JMenuItem();
+		editItemMenu.setText("Edit A Wish");
+		editItemMenu.setActionCommand("EDIT_A_WISH");
+		editItemMenu.addActionListener(mainController);
+		editMenu.add(editItemMenu);
 		
 		printAllWishesMenuItem = new JMenuItem();
 		printAllWishesMenuItem.setText("Print ALl!");
 		printAllWishesMenuItem.addActionListener(mainController);
 		editMenu.add(printAllWishesMenuItem);
 		topMenuBar.add(editMenu);
+	}
+	
+	/**
+	 * Layout Menu Items in About Menu.
+	 */
+	private void AddAboutMenu(JMenuBar topMenuBar) {
 		
 		aboutMenu = new JMenu();
 		aboutMenu.setText("ABOUT");
 		topMenuBar.add(aboutMenu);
 	}
 	
+	/**
+	 * Initialise Main Controller.
+	 */
 	private void initialiseController() {
 		mainController = new MainController(this);
 	}
@@ -113,5 +144,9 @@ public class MainView extends JFrame{
 	public JMenuItem getPrintAllWishesMenuItem() {
 		return printAllWishesMenuItem;
 	}
+	
+//	public JMenuItem getEditAWishMenuItem() {
+//		
+//	}
 }
 	
