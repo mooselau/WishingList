@@ -9,8 +9,8 @@ public class WishItem {
 	
 	/** Constructor */
 	public WishItem() {
-		name = null;
-		notes = null;
+		name = "";
+		notes = "";
 		completion = 0;
 	}
 	
@@ -18,7 +18,14 @@ public class WishItem {
 		this.name = na;
 		this.completion = comp;
 	}
+	
+	public WishItem(String na, int comp, String not) {
+		this.name = na;
+		this.completion = comp;
+		this.notes = not;
+	}
 
+	// Getters and Setters.
 	public String getName() {
 		return name;
 	}
@@ -37,6 +44,10 @@ public class WishItem {
 
 	public int getCompletion() {
 		return completion;
+	}
+	
+	public String getCompletionAsString() {
+		return String.valueOf(completion);
 	}
 
 	public void setCompletion(int completion) {

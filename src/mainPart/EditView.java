@@ -7,7 +7,7 @@ import java.awt.Dimension;
 import javax.swing.*;
 
 
-public class EditView extends JFrame{
+public class EditView extends JFrame {
 	
 	/** GLOBAL VARIABLES */
 	JPanel viewMainPanel, viewSelectorPanel;
@@ -28,9 +28,11 @@ public class EditView extends JFrame{
 		
 		viewSelectorPanel = new JPanel();
 		viewSelectorPanel.setPreferredSize(new Dimension(300,30));
-		viewSelectorPanel.setBackground(Color.green);
+		viewSelectorPanel.setOpaque(false);
 		viewMainPanel = new JPanel();
+		viewMainPanel.setBackground(Color.gray);
 		wishSelectComboBox = new JComboBox<String>();
+		wishSelectComboBox.setPreferredSize(new Dimension(200,20));
 	}
 
 	/**
@@ -40,6 +42,7 @@ public class EditView extends JFrame{
 		
 		viewSelectorPanel.add(wishSelectComboBox);
 		viewMainPanel.add(viewSelectorPanel);
+		this.setLayout(new BorderLayout());
 		this.add(viewMainPanel, BorderLayout.NORTH);
 		
 	}

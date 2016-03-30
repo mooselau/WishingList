@@ -42,6 +42,12 @@ public class WishingList {
 		return wishingList;
 	}
 	
+	public List<WishItem> addAWish(String wishName, int completion, String notes) {
+		WishItem newWish = new WishItem(wishName, completion, notes);
+		wishingList.add(newWish);
+		return wishingList;
+	}
+	
 	
 	/**
 	 * Add a wish with Wish Object
