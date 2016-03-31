@@ -3,6 +3,7 @@ package mainPart;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -59,18 +60,22 @@ public class EditDialog extends EditView implements ActionListener {
 	 */
 	private void initJComponents() {
 		
-		dialogCenterPanel = new JPanel();
-		// make the JPanel transparent.
-//		dialogCenterPanel.setOpaque(false);
-		dialogCenterPanel.setBackground(Color.DARK_GRAY);
 		dialogCenterNamePanel = new JPanel();
 //		dialogCenterNamePanel.setOpaque(false);
 		dialogCenterCompPanel = new JPanel();
 //		dialogCenterCompPanel.setOpaque(false);
+		
 		dialogCenterSubPanel = new JPanel();
+		dialogCenterSubPanel.setOpaque(false);
+		dialogCenterPanel = new JPanel();
+		// make the JPanel transparent.
+		dialogCenterPanel.setOpaque(false);
+//		dialogCenterPanel.setBackground(Color.DARK_GRAY);
 		
 		dialogSouthPanel = new JPanel();
+		dialogSouthPanel.setOpaque(false);
 		dialogSouthButtonsPanel = new JPanel();
+		dialogSouthButtonsPanel.setOpaque(false);
 		
 		viewMainPanel = super.getViewMainPanel();
 		//set main panel size.
@@ -126,13 +131,14 @@ public class EditDialog extends EditView implements ActionListener {
 		descriptionLabel = new JLabel("Wish Description: ");
 		dialogCenterSubPanel.add(descriptionLabel);
 		
-		descriptionTextArea = new JTextArea(1, 16);
+		descriptionTextArea = new JTextArea(8, 16);
 		// wrap lines automatically
 		descriptionTextArea.setLineWrap(true);
 		descripTextAreaScrollPane = new JScrollPane(descriptionTextArea);
 		
-		dialogCenterPanel.add(dialogCenterSubPanel, BorderLayout.PAGE_START);
-		dialogCenterPanel.add(descripTextAreaScrollPane, BorderLayout.PAGE_END);
+		dialogCenterPanel.setLayout(new BorderLayout());
+		dialogCenterPanel.add(dialogCenterSubPanel, BorderLayout.NORTH);
+		dialogCenterPanel.add(descripTextAreaScrollPane, BorderLayout.SOUTH);
 		
 	}
 	
@@ -140,7 +146,7 @@ public class EditDialog extends EditView implements ActionListener {
 	
 	private void layoutSouthComponents() {
 		
-		
+		dialogSouthButtonsPanel.setLayout(new FlowLayout());
 		okButton = new JButton("Okay");
 		okButton.setActionCommand("OKAY");
 		dialogSouthButtonsPanel.add(okButton);
@@ -148,7 +154,6 @@ public class EditDialog extends EditView implements ActionListener {
 		cancelButton = new JButton("Cancel");
 		cancelButton.setActionCommand("CANCEL");
 		dialogSouthButtonsPanel.add(cancelButton);
-		
 		
 		dialogSouthPanel.add(dialogSouthButtonsPanel, BorderLayout.SOUTH);
 	}
