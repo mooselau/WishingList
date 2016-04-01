@@ -42,7 +42,7 @@ public class EditDialog extends EditView implements ActionListener {
 		super();
 		
 		// Set Frame size.
-		this.setSize(380, 350);
+		this.setSize(290, 370);
 		this.setTitle("Edit Dialog");
 		
 		//Set the window at the center of the screen.
@@ -51,8 +51,6 @@ public class EditDialog extends EditView implements ActionListener {
 		initVariables(wishList);
 		layoutComponents();
 		addComboBoxItems(wishList);
-		
-		
 	}
 	
 	/**
@@ -70,7 +68,6 @@ public class EditDialog extends EditView implements ActionListener {
 		dialogCenterPanel = new JPanel();
 		// make the JPanel transparent.
 		dialogCenterPanel.setOpaque(false);
-//		dialogCenterPanel.setBackground(Color.DARK_GRAY);
 		
 		dialogSouthPanel = new JPanel();
 		dialogSouthPanel.setOpaque(false);
@@ -108,26 +105,27 @@ public class EditDialog extends EditView implements ActionListener {
 	}
 	
 	//leave it empty for this time..
-	private void layoutNorthComponents() {
-
-	}
+	private void layoutNorthComponents() {}
 	
 	private void layoutCenterComponents() {
 		
-		dialogCenterSubPanel.setLayout(new GridLayout(3, 1, 3, 2));
+		dialogCenterSubPanel.setLayout(new GridLayout(3, 1, 3, 3));
 		
+		//Layout Name Components.
 		nameLabel = new JLabel("Wish Name: ");
 		dialogCenterNamePanel.add(nameLabel);
 		nameTextField = new JTextField(10);
 		dialogCenterNamePanel.add(nameTextField);
 		dialogCenterSubPanel.add(dialogCenterNamePanel);
 		
+		//layout completion components.
 		completionLabel = new JLabel("Completion: ");
 		dialogCenterCompPanel.add(completionLabel);
 		completionTextField = new JTextField(10);
 		dialogCenterCompPanel.add(completionTextField);
 		dialogCenterSubPanel.add(dialogCenterCompPanel);
 		
+		// Wish descrip label.s
 		descriptionLabel = new JLabel("Wish Description: ");
 		dialogCenterSubPanel.add(descriptionLabel);
 		
@@ -136,17 +134,16 @@ public class EditDialog extends EditView implements ActionListener {
 		descriptionTextArea.setLineWrap(true);
 		descripTextAreaScrollPane = new JScrollPane(descriptionTextArea);
 		
+		//Add in the center panel.
 		dialogCenterPanel.setLayout(new BorderLayout());
 		dialogCenterPanel.add(dialogCenterSubPanel, BorderLayout.NORTH);
 		dialogCenterPanel.add(descripTextAreaScrollPane, BorderLayout.SOUTH);
-		
 	}
-	
 	
 	
 	private void layoutSouthComponents() {
 		
-		dialogSouthButtonsPanel.setLayout(new FlowLayout());
+		dialogSouthButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 35, 5));
 		okButton = new JButton("Okay");
 		okButton.setActionCommand("OKAY");
 		dialogSouthButtonsPanel.add(okButton);
@@ -208,7 +205,10 @@ public class EditDialog extends EditView implements ActionListener {
 		descriptionTextArea.setText(selectedWish.getNotes());
 		
 	}
-
+	
+	/**
+	 * Action performed when action listener is activated.
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		
