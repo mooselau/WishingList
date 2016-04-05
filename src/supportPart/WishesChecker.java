@@ -29,6 +29,7 @@ public class WishesChecker {
 		try {
 			
 			for(WishItem aWish: wishes) {
+
 				if(aWish.getName().isEmpty()) {
 					throw new CommonExceptions("There is an invalid wish with empty name!!");
 				}

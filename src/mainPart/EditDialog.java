@@ -23,8 +23,8 @@ public class EditDialog extends EditView implements ActionListener {
 	WishingList	wishList;
 	
 	/** JComponents */
-	JButton okButton, cancelButton;
-	JLabel nameLabel, completionLabel, descriptionLabel;
+	JButton okButton, cancelButton, moreButton;
+	JLabel nameLabel, totalEffortsLabel, descriptionLabel;
 	JTextField nameTextField, completionTextField;
 	JTextArea descriptionTextArea;
 	JScrollPane descripTextAreaScrollPane;
@@ -39,7 +39,7 @@ public class EditDialog extends EditView implements ActionListener {
 	/** Constructor */
 	public EditDialog(WishingList wishList) {
 		
-		super();
+		super(wishList);
 		
 		// Set Frame size.
 		this.setSize(290, 370);
@@ -50,7 +50,7 @@ public class EditDialog extends EditView implements ActionListener {
 		initJComponents();
 		initVariables(wishList);
 		layoutComponents();
-		addComboBoxItems(wishList);
+//		addComboBoxItems(wishList);
 	}
 	
 	/**
@@ -119,13 +119,13 @@ public class EditDialog extends EditView implements ActionListener {
 		dialogCenterSubPanel.add(dialogCenterNamePanel);
 		
 		//layout completion components.
-		completionLabel = new JLabel("Completion: ");
-		dialogCenterCompPanel.add(completionLabel);
+		totalEffortsLabel = new JLabel("Total Efforts: ");
+		dialogCenterCompPanel.add(totalEffortsLabel);
 		completionTextField = new JTextField(10);
 		dialogCenterCompPanel.add(completionTextField);
 		dialogCenterSubPanel.add(dialogCenterCompPanel);
 		
-		// Wish descrip label.s
+		// Wish description labels
 		descriptionLabel = new JLabel("Wish Description: ");
 		dialogCenterSubPanel.add(descriptionLabel);
 		
@@ -143,54 +143,61 @@ public class EditDialog extends EditView implements ActionListener {
 	
 	private void layoutSouthComponents() {
 		
-		dialogSouthButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 35, 5));
+		dialogSouthButtonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
+		
 		okButton = new JButton("Okay");
 		okButton.setActionCommand("OKAY");
+		okButton.addActionListener(this);
 		dialogSouthButtonsPanel.add(okButton);
 		
 		cancelButton = new JButton("Cancel");
 		cancelButton.setActionCommand("CANCEL");
+		cancelButton.addActionListener(this);
 		dialogSouthButtonsPanel.add(cancelButton);
 		
+		moreButton = new JButton("More>>");
+		moreButton.setActionCommand("MORE");
+		moreButton.addActionListener(this);
+		dialogSouthButtonsPanel.add(moreButton);
+
 		dialogSouthPanel.add(dialogSouthButtonsPanel, BorderLayout.SOUTH);
 	}
 	
 	
-	/**
-	 * Adding all content in the Combo Box.
-	 * @param wishList the wishingList object.
-	 */
-	private void addComboBoxItems(WishingList wishList) {
-		
-		List<WishItem> wishes = wishList.getCurrentWishes(); 
-		processChecking(wishes);
-		
-		for(WishItem aWish: wishes) {
-			wishSelectComboBox.addItem(aWish.getName());
-		}
-		
-	}
-	
-	/**
-	 * Processing the checking and might do sth afterwards.
-	 * @param wishList the wishingList object.
-	 */
-	private void processChecking(List<WishItem> wishList) {
-		
-		boolean isWishesNamesValid = false;
-		
-		//use the auxiliary tool in support part to check wishes.
-		isWishesNamesValid = wishListChecker.wishingListNameCheck(wishList);
-		
-		//If the wishes are invalid, then the Edit dialog will be closed automatically.
-		if(!isWishesNamesValid) {
-			JOptionPane.showMessageDialog(null, "Some Wishes are invalid!!", "Warning Message", JOptionPane.ERROR_MESSAGE);
-			
-			//closing event will be done by frame.dispatchEvent()..
-			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-		}
-		
-	}
+//	/**
+//	 * Adding all content in the Combo Box.
+//	 * @param wishList the wishingList object.
+//	 */
+//	private void addComboBoxItems(WishingList wishList) {
+//		
+//		List<WishItem> wishes = wishList.getCurrentWishes(); 
+//		processChecking(wishes);
+//		
+//		for(WishItem aWish: wishes) {
+//			wishSelectComboBox.addItem(aWish.getName());
+//		}
+//	}
+//	
+//	/**
+//	 * Processing the checking and might do sth afterwards.
+//	 * @param wishList the wishingList object.
+//	 */
+//	private void processChecking(List<WishItem> wishList) {
+//		
+//		boolean isWishesNamesValid = false;
+//		
+//		//use the auxiliary tool in support part to check wishes.
+//		isWishesNamesValid = wishListChecker.wishingListNameCheck(wishList);
+//		
+//		//If the wishes are invalid, then the Edit dialog will be closed automatically.
+//		if(!isWishesNamesValid) {
+//			JOptionPane.showMessageDialog(null, "Some Wishes are invalid!!", "Warning Message", JOptionPane.ERROR_MESSAGE);
+//			
+//			//closing event will be done by frame.dispatchEvent()..
+//			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+//		}
+//		
+//	}
 	
 	/**
 	 * Every time when the comboBox selects an item, then the fields
@@ -219,6 +226,19 @@ public class EditDialog extends EditView implements ActionListener {
 			}
 			System.out.println(newSelectedItem);
 		}
+		
+		else if(e.getSource() == okButton) {
+			System.out.println("You just pressed OK!!");
+		}
+		
+		else if(e.getSource() == cancelButton) {
+			System.out.println("You just pressed Cancel!!");
+		}
+		
+		else if(e.getSource() == moreButton) {
+			System.out.println("You just pressed More!!");
+		}
+		
 		
 	}
 	

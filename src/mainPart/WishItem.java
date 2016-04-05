@@ -1,19 +1,37 @@
 package mainPart;
 
+import java.util.Date;
+
 public class WishItem {
 	
 	/** Global Variables */
-	private String name, notes;
-	private int completion;
+	private String name, notes, costType;
+	private String creatingDate, expEndDate;
+	private int completion, totalCost, totalEfforts;
 	
 	
 	/** Constructor */
 	public WishItem() {
-		name = "";
-		notes = "";
-		completion = 0;
 	}
 	
+	public WishItem(String na, String costType, int totalCost, String creatingDa) {
+		this.name = na;
+		this.costType = costType;
+		this.totalCost = totalCost;
+		this.creatingDate = creatingDa;
+		this.expEndDate = "unlimited";
+	}
+	
+	public WishItem(String na, String costType, int totalCost, String creatingDa, String expEndDa, String descrip) {
+		this.name = na;
+		this.costType = costType;
+		this.totalCost = totalCost;
+		this.creatingDate = creatingDa;
+		this.expEndDate = expEndDa;
+		this.notes = descrip;
+	}
+	
+	// Temporally use
 	public WishItem(String na, int comp) {
 		this.name = na;
 		this.completion = comp;
