@@ -20,12 +20,12 @@ public class EditDialog extends EditView implements ActionListener {
 
 	/** GLOBAL VARIABLES **/
 	String comboPreviousSelectedItem;
-	WishingList	wishList;
+//	WishingList	wishList;
 	
 	/** JComponents */
 	JButton okButton, cancelButton, moreButton;
 	JLabel nameLabel, totalEffortsLabel, descriptionLabel;
-	JTextField nameTextField, completionTextField;
+	JTextField nameTextField, totalEffortsTextField;
 	JTextArea descriptionTextArea;
 	JScrollPane descripTextAreaScrollPane;
 	JPanel viewMainPanel, dialogCenterPanel, dialogSouthPanel, dialogCenterNamePanel, 
@@ -33,7 +33,7 @@ public class EditDialog extends EditView implements ActionListener {
 	JComboBox<String> wishSelectComboBox;
 	
 	/** Outside Dependencies */
-	WishesChecker wishListChecker;
+//	WishesChecker wishListChecker;
 	
 	
 	/** Constructor */
@@ -121,8 +121,8 @@ public class EditDialog extends EditView implements ActionListener {
 		//layout completion components.
 		totalEffortsLabel = new JLabel("Total Efforts: ");
 		dialogCenterCompPanel.add(totalEffortsLabel);
-		completionTextField = new JTextField(10);
-		dialogCenterCompPanel.add(completionTextField);
+		totalEffortsTextField = new JTextField(10);
+		dialogCenterCompPanel.add(totalEffortsTextField);
 		dialogCenterSubPanel.add(dialogCenterCompPanel);
 		
 		// Wish description labels
@@ -208,7 +208,7 @@ public class EditDialog extends EditView implements ActionListener {
 		
 		WishItem selectedWish= wishList.searchAWish(wishName);
 		nameTextField.setText(selectedWish.getName());
-		completionTextField.setText(selectedWish.getCompletionAsString());
+		totalEffortsTextField.setText(selectedWish.getTotalEffortsAsString());
 		descriptionTextArea.setText(selectedWish.getNotes());
 		
 	}
@@ -228,6 +228,7 @@ public class EditDialog extends EditView implements ActionListener {
 		}
 		
 		else if(e.getSource() == okButton) {
+			inputsCollector();
 			System.out.println("You just pressed OK!!");
 		}
 		
@@ -237,9 +238,27 @@ public class EditDialog extends EditView implements ActionListener {
 		
 		else if(e.getSource() == moreButton) {
 			System.out.println("You just pressed More!!");
+			
+			this.setVisible(false);
+			
+			EditMoreDialog editMoreDialog = new EditMoreDialog(wishList);
+			editMoreDialog.setVisible(true);
+			//temp use
+			editMoreDialog.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			
+//			// For automatically closing this frame.
+//			this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 		}
-		
 		
 	}
 	
+	private void inputsCollector() {
+		String newName  = nameTextField.getText();
+		String newTotalEfforts =totalEffortsTextField.getText();
+		String newNotes = descriptionTextArea.getText();
+		
+		String msg = String.format("********************\nBelow is your inputs: \newName: %s\n"
+				+ "newTotalEfforts: %s\nnewNotes: %s", newName, newTotalEfforts, newNotes);
+		System.out.println(msg);
+	}
 }

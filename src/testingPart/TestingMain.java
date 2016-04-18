@@ -16,6 +16,16 @@ public class TestingMain {
 		
 		WishingListSample wls = new WishingListSample();
 		WishingList wl = wls.getASampleWishingList();
+
+		//4.  Delete Dialog
+		DeleteDialog dd = new DeleteDialog(wl);
+		dd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		dd.setVisible(true);
+		
+		//3. Input Dialog
+//		InputDialog id = new InputDialog(wl);
+//		id.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		id.setVisible(true);
 		
 		//1. edit dialog
 //		EditDialog ed = new EditDialog(wl);
@@ -23,9 +33,9 @@ public class TestingMain {
 //		ed.setVisible(true);
 		
 		//2. edit more dialog
-		EditMoreDialog em = new EditMoreDialog(wl);
-		em.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		em.setVisible(true);
+//		EditMoreDialog em = new EditMoreDialog(wl);
+//		em.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		em.setVisible(true);
 		
 		//99. testing date and time
 //		Date d = new Date();
