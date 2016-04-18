@@ -16,11 +16,16 @@ public class TestingMain {
 		
 		WishingListSample wls = new WishingListSample();
 		WishingList wl = wls.getASampleWishingList();
-
+		
+		//5. create dialog
+		CreateDialog cd = new CreateDialog();
+		cd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		cd.setVisible(true);
+		
 		//4.  Delete Dialog
-		DeleteDialog dd = new DeleteDialog(wl);
-		dd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		dd.setVisible(true);
+//		DeleteDialog dd = new DeleteDialog(wl);
+//		dd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		dd.setVisible(true);
 		
 		//3. Input Dialog
 //		InputDialog id = new InputDialog(wl);

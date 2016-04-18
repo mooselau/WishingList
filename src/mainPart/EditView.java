@@ -14,13 +14,13 @@ import supportPart.WishesChecker;
 public class EditView extends JFrame {
 	
 	/** GLOBAL VARIABLES */
-	WishingList wishList;
+	protected WishingList wishList;
 	
-	JPanel viewMainPanel, viewSelectorPanel;
-	JComboBox<String> wishSelectComboBox;
+	protected JPanel viewMainPanel, viewSelectorPanel;
+	protected JComboBox<String> wishSelectComboBox;
 	
 	/** Outside Dependencies */
-	WishesChecker wishListChecker;
+	protected WishesChecker wishListChecker;
 	
 	/** Constructor */
 	public EditView(WishingList wishList) {

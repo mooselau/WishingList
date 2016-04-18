@@ -257,7 +257,7 @@ public class EditDialog extends EditView implements ActionListener {
 		String newTotalEfforts =totalEffortsTextField.getText();
 		String newNotes = descriptionTextArea.getText();
 		
-		String msg = String.format("********************\nBelow is your inputs: \newName: %s\n"
+		String msg = String.format("********************\nBelow is your inputs: \nnewName: %s\n"
 				+ "newTotalEfforts: %s\nnewNotes: %s", newName, newTotalEfforts, newNotes);
 		System.out.println(msg);
 	}
