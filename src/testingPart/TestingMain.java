@@ -17,6 +17,11 @@ public class TestingMain {
 		WishingListSample wls = new WishingListSample();
 		WishingList wl = wls.getASampleWishingList();
 		
+		//6. create next dialog
+//		CreateNextDialog cnd = new CreateNextDialog("Sample Wish", "RMBs", "5000");
+//		cnd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		cnd.setVisible(true);
+		
 		//5. create dialog
 		CreateDialog cd = new CreateDialog();
 		cd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

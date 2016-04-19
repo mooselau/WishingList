@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import supportPart.InputsContainer;
 import defaultPart.SomeUtilities;
 
 public class CreateDialog extends JFrame implements ActionListener{
@@ -29,7 +30,8 @@ public class CreateDialog extends JFrame implements ActionListener{
 	private JPanel dialogMainPanel, dialogCenterPanel, dialogSouthPanel, inputAreaPanel;
 	
 	/** other vairables */
-	SomeUtilities toolBox = new SomeUtilities();
+	private InputsContainer inputsContainer;
+	private SomeUtilities toolBox = new SomeUtilities();
 	
 	/** Constructor */
 	public CreateDialog() {
@@ -41,8 +43,17 @@ public class CreateDialog extends JFrame implements ActionListener{
 		//Set the window at the center of the screen.
 		setLocationRelativeTo(null);
 		
+		initVariables();
 		initJComponents();
 		layoutComponents();
+	}
+	
+	/**
+	 * Initialize main variables.
+	 */
+	private void initVariables() {
+		
+		inputsContainer = new InputsContainer();
 	}
 	
 	/**
@@ -114,8 +125,8 @@ public class CreateDialog extends JFrame implements ActionListener{
 		JLabel costTypeLabel = new JLabel();
 		costTypeLabel.setText("Cost Type:");
 		wishCostTypeCombo = new JComboBox<String>();
-		wishCostTypeCombo.addItem("Days");
 		wishCostTypeCombo.addItem("RMBs");
+		wishCostTypeCombo.addItem("Days");
 		costTypePanel.add(costTypeLabel);
 		costTypePanel.add(wishCostTypeCombo);
 		costPanel.add(costTypePanel);
@@ -138,6 +149,15 @@ public class CreateDialog extends JFrame implements ActionListener{
 	}
 	
 	/**
+	 * Get the inputs Container in this dialog.
+	 * @return the inputs container.
+	 */
+	public InputsContainer getInputsContainer() {
+		
+		return inputsContainer;
+	}
+	
+	/**
 	 * Events handlers and performs.
 	 */
 	@Override
@@ -154,6 +174,12 @@ public class CreateDialog extends JFrame implements ActionListener{
 		
 		else if(e.getSource() == nextButton) {
 			toolBox.printThis("You just Pressed Next!");
+			inputsCollector();
+			String wishName = inputsContainer.pullInputValue("wishName");
+			CreateNextDialog cnd = new CreateNextDialog(this, wishName);
+			cnd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			cnd.setVisible(true);
+			this.setVisible(false);	// hide itself.
 		}
 	}
 	
@@ -168,11 +194,14 @@ public class CreateDialog extends JFrame implements ActionListener{
 	
 	private void inputsCollector() {
 		String wishName  = this.getSafeTextFieldValue(wishNameTextField);
+		inputsContainer.pushInput("wishName", wishName);
 		String totalCost = this.getSafeTextFieldValue(wishCostTextField);
+		inputsContainer.pushInput("totalCost", totalCost);
 		String wishCostType = String.valueOf(wishCostTypeCombo.getSelectedItem());
+		inputsContainer.pushInput("wishCostType", wishCostType);
 		
 		String msg = String.format("********************\nBelow is your inputs: \nnewName: %s\n"
-				+ "newTotalEfforts: %s\nnewNotes: %s", wishName, totalCost, wishCostType);
+				+ "wishTotalCosts: %s\nwishCostType: %s", wishName, totalCost, wishCostType);
 		System.out.println(msg);
 	}
 	
